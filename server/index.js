@@ -68,9 +68,8 @@ app.get('/api/terms', async (req, res) => {
 app.post('/api/terms', async (req, res) => {
   try {
     const { id, term, definition, dateAdded, initialThoughts } = req.body;
-    // Server-side Error: Misspelled column name 'definiton' instead of 'definition'
     await run(
-      'INSERT INTO terms (id, term, definiton, dateAdded, initialThoughts) VALUES (?, ?, ?, ?, ?)',
+      'INSERT INTO terms (id, term, definition, dateAdded, initialThoughts) VALUES (?, ?, ?, ?, ?)',
       [id, term, definition, dateAdded, initialThoughts]
     );
     res.json({ success: true });
@@ -122,7 +121,7 @@ app.get('*', (req, res) => {
   res.sendFile(join(__dirname, 'public', 'index.html'));
 });
 
-const port = 3000;
+const port = 3001;
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
